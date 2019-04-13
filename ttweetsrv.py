@@ -19,7 +19,8 @@ def on_new_client(clientsocket,addr):
 
         if command == "exit":
             if exit(clientsocket, addr, user):
-                clientsocket.send(bytes("exited", 'utf-8'))
+                ret = "exited"
+                clientsocket.send(ret.encode())
             else:
                 print("Something is wrong wit exiting")
             break
@@ -33,11 +34,13 @@ def on_new_client(clientsocket,addr):
             print(new_message)
             if len(new_message) > 150:
                 print("Length of message is over 150 characters")
-                clientsocket.send(bytes("err3", 'utf-8'))
+                ret = "err3"
+                clientsocket.send(ret.encode)
             tag = message_array[len(message_array) - 1][1:]
 
             tweet(clientsocket, addr, new_message, tag)
-            clientsocket.send(bytes("succ3", 'utf-8'))
+            ret = "succ3"
+            clientsocket.send(ret.encode())
         
 
         elif command == "login":
@@ -45,40 +48,49 @@ def on_new_client(clientsocket,addr):
             user = username
             if not login(clientsocket, addr, user):
                 print("login failed")
-                clientsocket.send(bytes("err0", 'utf-8'))
+                ret = "err0"
+                clientsocket.send(ret.encode())
                 break
             else:
                 print("login succeded")
-                clientsocket.send(bytes("succ0", 'utf-8'))
+                ret = "succ0"
+                clientsocket.send(ret.encode())
 
         elif command == "subscribe":
             tag = msg.split(" ")[1]
             if not subscribe(clientsocket, addr, tag, user):
                 print("subscription failed")
-                clientsocket.send(bytes("err1 " + tag, 'utf-8'))
+                ret = "err1 " + tag
+                clientsocket.send(ret.encode())
             else:
                 print("subscription succeded")
-                clientsocket.send(bytes("succ1 " + tag, 'utf-8'))
+                ret = "succ1 " + tag
+                clientsocket.send(ret.encode())
 
         elif command == "unsubscribe":
             tag = msg.split(" ")[1]
             if not unsubscribe(clientsocket, addr, tag, user):
                 print("unsubscription failed")
-                clientsocket.send(bytes("err2 " + tag, 'utf-8'))
+                ret = "err2 " + tag
+                clientsocket.send(ret.encode())
             else:
                 print("unsubscription succeded")
-                clientsocket.send(bytes("succ2 " + tag, 'utf-8'))
+                ret = "succ2 " + tag
+                clientsocket.send(ret.encode())
 
         elif command == "timeline":
             ret = ""
             for message in tweet_box[user]:
                 ret = ret + message + "\n"
             if ret =="":
-                clientsocket.send(bytes("err4", 'utf-8'))
+                retval = "err4"
+                clientsocket.send(retval.encode())
             else:
-                clientsocket.send(bytes("succ4 " + ret, 'utf-8'))
+                retval = "succ4 " + ret
+                clientsocket.send(retval.encode())
         else:
-            clientsocket.send(bytes("err5", 'utf-8'))
+            ret = "err5"
+            clientsocket.send(ret.encode())
 
         # something = "hello my friend"
 
@@ -131,8 +143,8 @@ def tweet(clientsocket, addr, message, tags):
                     break
                 if tag == tag_tweeted or tag == "ALL": 
                     target = True
-                    twt = addr_user[addr] + ": " + message + " " + tags
-                    user_socket[user].send(bytes("succ5 " + twt, 'utf-8'))
+                    twt = "succ5 " + addr_user[addr] + ": " + message + " " + tags
+                    user_socket[user].send(twt.encode())
                     break
                 
 
