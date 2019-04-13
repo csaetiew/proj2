@@ -12,13 +12,22 @@ def listen(s, msgbox):
             print(msgbox[0])
             msgbox[0] = ""
             continue
-        # if MESSAGE.split(" ")[0] == "tweet":
-        #     if 
+        if MESSAGE.split(" ")[0] == "tweet":
+            print(MESSAGE)
+            # message_array = msg.split("\"")
+            # new_message = ""
+            # print(message_array)
+            # for x in range(1, len(message_array) - 1):
+            #     new_message += message_array[x]
+            # print(new_message)
+            # if len(new_message) > 150:
+            #     print("Length of message is over 150 characters")
+
         s.send(MESSAGE.encode())
 
 def main():
     if len(sys.argv) !=4:
-        print("python ttweetcl.py <ServerIP> <ServerPort> <Username>")
+        print("args should contain <ServerIP>   <ServerPort>   <Username>")
         return
 
     TCP_IP = sys.argv[1]
@@ -42,7 +51,7 @@ def main():
     try:
         s.connect((TCP_IP, TCP_PORT))
     except socket.error:
-        print ("Could not connect with server")
+        print ("connection error, please check your server: connection refused")
         return
 
     thread.start_new_thread(listen,(s, msgbox))

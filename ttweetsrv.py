@@ -22,7 +22,7 @@ def on_new_client(clientsocket,addr):
                 ret = "exited"
                 clientsocket.send(ret.encode())
             else:
-                print("Something is wrong wit exiting")
+                print("Something is wrong with exiting")
             break
 
         elif command == "tweet":
