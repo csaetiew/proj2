@@ -5,7 +5,6 @@ import sys
 import thread
 
 def listen(s, msgbox):
-    print("the thred runs")
     while True:
         MESSAGE = input()
         print(MESSAGE)
