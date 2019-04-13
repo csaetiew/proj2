@@ -12,8 +12,8 @@ def listen(s, msgbox):
             print(msgbox[0])
             msgbox[0] = ""
             continue
-        if MESSAGE.split(" ")[0] == "tweet":
-            if 
+        # if MESSAGE.split(" ")[0] == "tweet":
+        #     if 
         s.send(bytes(MESSAGE, 'UTF-8'))
 
 def main():
