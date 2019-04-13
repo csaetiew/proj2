@@ -15,7 +15,7 @@ class judge:
     python2 judge2.py <type>
 
     The type mapping depends on your programming language:
-    {'j':'java ', 'p':'python2 ', 'c':'./', 'jar': 'java -jar '}
+    {'j':'java ', 'p':'python2 -u ', 'c':'./', 'jar': 'java -jar '}
 
     The default port number for the driver is 13000
 
