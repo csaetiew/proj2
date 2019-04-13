@@ -40,7 +40,12 @@ def main():
     msgbox = []
     msgbox.append("")
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.connect((TCP_IP, TCP_PORT))
+    try:
+        s.connect((TCP_IP, TCP_PORT))
+    except socket.error:
+        print ("Could not connect with server")
+        return
+
     thread.start_new_thread(listen,(s, msgbox))
     s.send(MESSAGE.encode())
 
