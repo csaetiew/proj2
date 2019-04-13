@@ -8,6 +8,8 @@ def listen(s, msgbox):
     print("the thred runs")
     while True:
         MESSAGE = input()
+        print(MESSAGE)
+
         if MESSAGE == "timeline":
             print(msgbox[0])
             msgbox[0] = ""
@@ -97,8 +99,6 @@ def main():
 
         elif code =="err5":
             print("Not a proper command")
-        print ("received data:", data)
-
     s.close()
 
 
