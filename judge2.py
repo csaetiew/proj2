@@ -15,7 +15,7 @@ class judge:
     python2 judge2.py <type>
 
     The type mapping depends on your programming language:
-    {'j':'java ', 'p':'python2 -u ', 'c':'./', 'jar': 'java -jar '}
+    {'j':'java ', 'p':'python2 ', 'c':'./', 'jar': 'java -jar '}
 
     The default port number for the driver is 13000
 
@@ -341,7 +341,7 @@ class judge:
             # start server
             p = self.start_server(type, srv_names[type], port)
         else:
-            t = raw_input('Please start your server manually, then press Enter to continue')
+            t = input('Please start your server manually, then press Enter to continue')
 
 
         self.test_illegal_input(type, client_names[type])
@@ -351,8 +351,8 @@ class judge:
         if(srv):
             os.killpg(os.getpgid(p.pid), signal.SIGTERM)
         if(not srv):
-            t = raw_input('Please close your server manually, then press Enter to continue')
-            self.test_no_server(type, client_names[type], port)
+            t = input('Please close your server manually, then press Enter to continue')
+            self.test_no_server(type, client_names[type])
 
         self.file.close()
         self.server.close()
@@ -362,4 +362,4 @@ class judge:
 if __name__ == '__main__':
     import sys
     args = sys.argv
-    judge().runTest(args[1], False, 13000)
+    judge().runTest(args[1], True, 13000)
