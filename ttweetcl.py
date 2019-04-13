@@ -17,7 +17,6 @@ def listen(s, msgbox):
         s.send(MESSAGE.encode())
 
 def main():
-    print(len(sys.argv))
     if len(sys.argv) !=4:
         print("python ttweetcl.py <ServerIP> <ServerPort> <Username>")
         return
