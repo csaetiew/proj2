@@ -12,10 +12,13 @@ def listen(s, msgbox):
             print(msgbox[0])
             msgbox[0] = ""
             continue
+        if MESSAGE.split(" ")[0] == "tweet":
+            if 
         s.send(bytes(MESSAGE, 'UTF-8'))
 
 def main():
-    if len(sys.argv) !=4:
+    print(len(sys.argv))
+    if len(sys.argv) !=3:
         print("python ttweetcl.py <ServerIP> <ServerPort> <Username>")
 
     TCP_IP = sys.argv[1]
