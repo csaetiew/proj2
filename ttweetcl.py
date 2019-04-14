@@ -1,18 +1,20 @@
-#!/usr/bin/env python
-
 import socket
 import sys
 import thread
+# Use of thread format comes from https://stackoverflow.com/questions/10810249/python-socket-multiple-clients
 
+# Method that runs on a new thread to accept nonblocking inputs from user
 def listen(s, msgbox):
     while True:
-        MESSAGE = raw_input()
+        MESSAGE = raw_input() # obtain input from user
         print(MESSAGE)
 
+        # prints message box and resets box
         if MESSAGE == "timeline":
             print(msgbox[0])
             msgbox[0] = ""
             continue
+        # Checks that the tweet confirms to length and legal symbols
         if MESSAGE.split(" ")[0] == "tweet":
             message_array = MESSAGE.split("\"")
             new_message = ""
@@ -26,7 +28,7 @@ def listen(s, msgbox):
             if len(new_message) < 1:
                 print("message format illegal")
                 continue
-        s.send(MESSAGE.encode("utf-8"))
+        s.send(MESSAGE.encode("utf-8")) # Send message to server
 
 def main():
     if len(sys.argv) !=4:

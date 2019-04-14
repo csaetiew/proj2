@@ -80,6 +80,7 @@ class judge:
             yield m
 
     def test_single_client(self, type, name, port):
+        print("in test_single_client")
         self.file.write('test_single_client\n')
         self.file.flush()
         username = 'cxworks'
@@ -113,6 +114,8 @@ class judge:
 
 
     def test_multi_client(self, type, name, port):
+        print("in test_multi_client")
+
         self.file.write('test_multi_client\n')
         self.file.flush()
         MAX_CLIENT_NUM = 5
@@ -161,6 +164,8 @@ class judge:
         self.file.flush()
 
     def test_logic(self, type, name, port):
+        print("in test_logic")
+
         # test dup username
         username = 'cxworks'
         cmd = self.run[type] + name + ' 127.0.0.1 %d %s' % (port, username )
@@ -289,6 +294,7 @@ class judge:
             self.file.flush()
 
     def test_no_server(self, type, name, port):
+        print("in test_no_server")
         self.file.write('test_no_server\n')
         self.file.flush()
         cmds=[' 127.0.0.1 %d cxworks' % port]
@@ -305,6 +311,8 @@ class judge:
         self.file.flush()
 
     def test_illegal_input(self, type, name):
+        print("in test_illegal_input")
+
         self.file.write('test_illegal_input\n')
         self.file.flush()
         cmds=[' ', ' 127.0.0.1',' 324.1.1.4', ' 127.0.0.1 -3', ' 127.0.0.1 80 ', ' 127.0.0.1 13000 ']
