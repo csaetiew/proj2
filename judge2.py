@@ -38,7 +38,7 @@ class judge:
     """
 
     def __init__(self):
-        self.run={'j':'java ', 'p':'python2 ', 'c':'./', 'jar': 'java -jar '}
+        self.run={'j':'java ', 'p':'python2 -u ', 'c':'./', 'jar': 'java -jar '}
         if(os.path.exists('client.txt')):
             os.remove('client.txt')
         if (os.path.exists('server.txt')):
