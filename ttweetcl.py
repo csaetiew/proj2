@@ -6,7 +6,7 @@ import thread
 
 def listen(s, msgbox):
     while True:
-        MESSAGE = input()
+        MESSAGE = raw_input()
         print(MESSAGE)
 
         if MESSAGE == "timeline":
