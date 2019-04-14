@@ -10,7 +10,8 @@ def listen(s, msgbox):
 
         # prints message box and resets box
         if MESSAGE == "timeline":
-            print(msgbox[0] + "\n")
+            print(msgbox[0])
+            print("\n")
             msgbox[0] = ""
             continue
         # Checks that the tweet confirms to length and legal symbols
@@ -20,17 +21,20 @@ def listen(s, msgbox):
             for x in range(1, len(message_array) - 1):
                 new_message += message_array[x]
             if len(new_message) > 150:
-                print("Length of message is over 150 characters" + "\n")
+                print("Length of message is over 150 characters")
+                print("\n")
                 continue
             if len(new_message) < 1:
-                print("message format illegal" + "\n")
+                print("message format illegal")
+                print("\n")
                 continue
         s.send(MESSAGE.encode("utf-8")) # Send message to server
 
 def main():
     # Checks the number of arguements
     if len(sys.argv) !=4:
-        print("args should contain <ServerIP>   <ServerPort>   <Username>" + "\n")
+        print("args should contain <ServerIP>   <ServerPort>   <Username>")
+        print("\n")
         return
 
     # Initialize IP, PORT, BUFFER_SIZE, initial login message, and username
@@ -44,12 +48,14 @@ def main():
     IP_test = TCP_IP.split(".")
     for ip in IP_test:
         if int(ip) < 0 or int(ip) > 255:
-            print("IP should be in [0, 255]" + "\n")
+            print("IP should be in [0, 255]")
+            print("\n")
             return
 
     # Test range of PORT numbers
     if TCP_PORT < 0 or TCP_PORT > 65535:
-        print("port number should be in [1,65535]" + "\n")
+        print("port number should be in [1,65535]")
+        print("\n")
         return
 
     # Initialize message box for user
@@ -63,7 +69,8 @@ def main():
     try:
         s.connect((TCP_IP, TCP_PORT))
     except socket.error:
-        print ("connection error, please check your server: connection refused" + "\n")
+        print ("connection error, please check your server: connection refused")
+        print("\n")
         return
     # Start a new thread to allow input from user and send the socket and message box
     thread.start_new_thread(listen,(s, msgbox))
@@ -83,39 +90,51 @@ def main():
         # if statement to print correct report
         code = data.split(" ")[0]
         if code == "err0": # Login error where the username is already taken
-            print("The user " + sys.argv[3] + " is already logged in" + "\n")
+            print("The user " + sys.argv[3] + " is already logged in")
+            print("\n")
             break
         elif code == "succ0": # Login success, print confirmation
-            print("logged in as " + sys.argv[3] + "\n")
+            print("logged in as " + sys.argv[3])
+            print("\n")
         elif code == "err1": # Subscription error due to 3 limitation or already subscribed
-            print("sub " + data.split(" ")[1] + " failed, already exists or exceeds 3 limitation" + "\n")
+            print("sub " + data.split(" ")[1] + " failed, already exists or exceeds 3 limitation")
+            print("\n")
         elif code == "succ1": # Subscription successful. Print confirmation
-            print("Subscribed to " + data.split(" ")[1] + "\n")
+            print("Subscribed to " + data.split(" ")[1])
+            print("\n")
         elif code == "exited": # Successfully exited, print confirmation
-            print("Successfully Logged out" + "\n")
+            print("Successfully Logged out")
+            print("\n")
             break
         elif code == "err2": #
-            print("You're not subscribed to " +  data.split(" ")[1] + "\n")
+            print("You're not subscribed to " +  data.split(" ")[1])
+            print("\n")
         elif code == "succ2":
-            print("Successfully unsubscribed from " +  data.split(" ")[1] + "\n")
+            print("Successfully unsubscribed from " +  data.split(" ")[1])
+            print("\n")
         elif code == "err3":
-            print("Length of message is over 150 characters" + "\n")
+            print("Length of message is over 150 characters")
+            print("\n")
         elif code == "succ3":
             pass 
             # print("Successfully tweeted")
         elif code == "err4":
-            print("No messages" + "\n")
+            print("No messages")
+            print("\n")
         elif code == "succ4":
             print(msgbox)
+            print("\n")
         elif code == "succ5":
-            print("user: " + userName + ", get message: " + data[6:] + "\n")
+            print("user: " + userName + ", get message: " + data[6:])
+            print("\n")
             if len(msgbox[0]) == 0:
                 msgbox[0] += "user: " + userName + ", get timeline: " + data[6:]
             else:
                 msgbox[0] += "\n" + "user: " + userName + ", get timeline: " + data[6:]
 
         elif code =="err5":
-            print("Not a proper command" + "\n")
+            print("Not a proper command")
+            print("\n")
     s.close()
 
 
