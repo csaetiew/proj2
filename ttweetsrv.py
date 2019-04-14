@@ -13,7 +13,7 @@ user_socket = {}
 def on_new_client(clientsocket,addr):
     user = ""
     while True:
-        msg = clientsocket.recv(1024).decode('ASCII')
+        msg = clientsocket.recv(1024).decode("utf-8")
         command = msg.split(" ")[0]
         print("received " + msg)
 
