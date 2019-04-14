@@ -13,7 +13,7 @@ user_socket = {}
 def on_new_client(clientsocket,addr):
     user = ""
     while True:
-        msg = clientsocket.recv(1024).decode('ASCII')
+        msg = clientsocket.recv(1024).decode('ASCII')[2:]
         command = msg.split(" ")[0]
         print("received " + msg)
 
@@ -35,7 +35,7 @@ def on_new_client(clientsocket,addr):
             if len(new_message) > 150:
                 print("Length of message is over 150 characters")
                 ret = "err3"
-                clientsocket.send(ret.encode)
+                clientsocket.send(ret.encode())
             tag = message_array[len(message_array) - 1][1:]
 
             tweet(clientsocket, addr, new_message, tag)

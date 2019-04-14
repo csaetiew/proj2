@@ -14,16 +14,16 @@ def listen(s, msgbox):
             msgbox[0] = ""
             continue
         if MESSAGE.split(" ")[0] == "tweet":
-            print(MESSAGE)
-            # message_array = msg.split("\"")
-            # new_message = ""
-            # print(message_array)
-            # for x in range(1, len(message_array) - 1):
-            #     new_message += message_array[x]
-            # print(new_message)
-            # if len(new_message) > 150:
-            #     print("Length of message is over 150 characters")
-
+            message_array = MESSAGE.split("\"")
+            new_message = ""
+            print(message_array)
+            for x in range(1, len(message_array) - 1):
+                new_message += message_array[x]
+            print(new_message)
+            if len(new_message) > 150:
+                print("Length of message is over 150 characters")
+            if len(new_message) < 1:
+                print("must have at least 1 character")
         s.send(MESSAGE.encode())
 
 def main():
