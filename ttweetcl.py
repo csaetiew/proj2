@@ -4,7 +4,7 @@ import thread
 # Use of thread format comes from https://stackoverflow.com/questions/10810249/python-socket-multiple-clients
 
 # Method that runs on a new thread to accept nonblocking inputs from user
-def listen(s, msgbox):
+def listen(s, msgbox, userName):
     while True:
         MESSAGE = raw_input() # obtain input from user
 
@@ -20,10 +20,10 @@ def listen(s, msgbox):
             for x in range(1, len(message_array) - 1):
                 new_message += message_array[x]
             if len(new_message) > 150:
-                print("Length of message is over 150 characters")
+                print("user: " + userName + ", message length illeagal, [1,150]")
                 continue
             if len(new_message) < 1:
-                print("message format illegal")
+                print("user: " + userName + ", message format illegal")
                 continue
         s.send(MESSAGE.encode("utf-8")) # Send message to server
 
@@ -66,7 +66,7 @@ def main():
         print ("connection error, please check your server: connection refused")
         return
     # Start a new thread to allow input from user and send the socket and message box
-    thread.start_new_thread(listen,(s, msgbox))
+    thread.start_new_thread(listen,(s, msgbox, userName))
 
     # Send the login message 
     s.send(MESSAGE.encode("utf-8"))
