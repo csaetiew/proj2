@@ -92,12 +92,12 @@ def main():
         elif code == "succ4":
             print(msgbox)
         elif code == "succ5":
-            print(userName + ", get message: " + data[6:])
+            print(data[6:])
             temp = userName + ", timeline message: " + data[6:]
             if len(msgbox[0]) == 0:
-                msgbox[0] += data[6:]
+                msgbox[0] += temp
             else:
-                msgbox[0] += "\n" + data[6:]
+                msgbox[0] += "\n" + temp
 
         elif code =="err5":
             print("Not a proper command")
