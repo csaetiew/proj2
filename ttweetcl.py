@@ -67,7 +67,7 @@ def main():
         while True:
             part = s.recv(BUFFER_SIZE)
             data += part
-            if len(part) < BUFFER_SIZE:
+            if len(part) == 0:
                 break
         code = data.split(" ")[0]
         if code == "err0":
