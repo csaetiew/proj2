@@ -91,7 +91,7 @@ def main():
         elif code == "succ4":
             print(msgbox)
         elif code == "succ5":
-            print(data[6:])
+            print(data)
 
             
             if len(msgbox[0]) == 0:
