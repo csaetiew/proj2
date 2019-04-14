@@ -132,7 +132,7 @@ def tweet(clientsocket, addr, message, tags):
                 # If match, then send message to the target then move on to a new user
                 if tag == tag_tweeted or tag == "ALL": 
                     target = True
-                    twt = "succ5 " + addr_user[addr] + ": " + message + " " + tags
+                    twt = "succ5 " + message + " from " + addr_user[addr] + " with " + tags
                     user_socket[user].send(twt.encode("utf-8"))
                     break
     return True
