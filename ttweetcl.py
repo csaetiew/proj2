@@ -22,8 +22,10 @@ def listen(s, msgbox):
             print(new_message)
             if len(new_message) > 150:
                 print("Length of message is over 150 characters")
+                continue
             if len(new_message) < 1:
-                print("must have at least 1 character")
+                print("message format illegal")
+                continue
         s.send(MESSAGE.encode("utf-8"))
 
 def main():
