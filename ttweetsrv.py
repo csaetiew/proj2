@@ -46,6 +46,7 @@ def on_new_client(clientsocket,addr):
         elif command == "login":
             username = msg.split(" ")[1]
             user = username
+            print(user)
             if not login(clientsocket, addr, user):
                 print("login failed")
                 ret = "err0"
