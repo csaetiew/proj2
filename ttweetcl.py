@@ -83,21 +83,21 @@ def main():
         # if statement to print correct report
         code = data.split(" ")[0]
         if code == "err0": # Login error where the username is already taken
-            print("The user " + sys.argv[3] + " is already logged in")
+            print("user: " + userName + ", connection failed since username occupied")
             break
         elif code == "succ0": # Login success, print confirmation
-            print("logged in as " + sys.argv[3])
+            print("user: " + userName + ", connection established")
         elif code == "err1": # Subscription error due to 3 limitation or already subscribed
             print("sub " + data.split(" ")[1] + " failed, already exists or exceeds 3 limitation")
         elif code == "succ1": # Subscription successful. Print confirmation
-            print("Subscribed to " + data.split(" ")[1])
+            print("user: " + userName + ", operation success: null")
         elif code == "exited": # Successfully exited, print confirmation
-            print("Successfully Logged out")
+            print("bye bye")
             break
         elif code == "err2": # Failed to unsubscribe because the tag is not subscribed
             print("You're not subscribed to " +  data.split(" ")[1])
         elif code == "succ2": # successfully unsubscribed from the given tag
-            print("Successfully unsubscribed from " +  data.split(" ")[1])
+            print("user: " + userName + ", operation success: null")
         elif code == "err3": # Not Used!! The check is in the listen method
             pass
             # print("Length of message is over 150 characters")
