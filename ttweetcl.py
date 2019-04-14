@@ -19,7 +19,6 @@ def listen(s, msgbox):
             new_message = ""
             for x in range(1, len(message_array) - 1):
                 new_message += message_array[x]
-            print(new_message)
             if len(new_message) > 150:
                 print("Length of message is over 150 characters")
                 continue
