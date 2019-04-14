@@ -22,7 +22,7 @@ def on_new_client(clientsocket,addr):
         if command == "exit": 
             if exit(clientsocket, addr, user): # go to exit method for clean up
                 ret = "exited"
-                clientsocket.send(ret.encode()) # return success to client
+                clientsocket.send(ret.encode("utf-8")) # return success to client
 
         elif command == "tweet":
 
@@ -39,7 +39,7 @@ def on_new_client(clientsocket,addr):
             tweet(clientsocket, addr, new_message, tag) # calls tweet method
 
             ret = "succ3"
-            clientsocket.send(ret.encode()) #return success
+            clientsocket.send(ret.encode("utf-8")) #return success
         
 
         elif command == "login":
@@ -48,12 +48,12 @@ def on_new_client(clientsocket,addr):
             if not login(clientsocket, addr, user): # if username is already taken
                 print("login failed")
                 ret = "err0"
-                clientsocket.send(ret.encode()) # return error to client
+                clientsocket.send(ret.encode("utf-8")) # return error to client
                 break
             else:
                 print("login succeded")
                 ret = "succ0"
-                clientsocket.send(ret.encode()) # return successful login to client
+                clientsocket.send(ret.encode("utf-8")) # return successful login to client
 
         elif command == "subscribe":
             tag = msg.split(" ")[1] # obtain the tag of the client
@@ -61,25 +61,25 @@ def on_new_client(clientsocket,addr):
             if not subscribe(clientsocket, addr, tag, user): # calls the subscribe tag
                 print("subscription failed") # subscription to tag failed
                 ret = "err1 " + tag
-                clientsocket.send(ret.encode()) # return error to client
+                clientsocket.send(ret.encode("utf-8")) # return error to client
             else:
                 print("subscription succeded")
                 ret = "succ1 " + tag
-                clientsocket.send(ret.encode()) # return success to client
+                clientsocket.send(ret.encode("utf-8")) # return success to client
 
         elif command == "unsubscribe":
             tag = msg.split(" ")[1] # obtain the tag of the client
             if not unsubscribe(clientsocket, addr, tag, user): # removal failed
                 print("unsubscription failed")
                 ret = "err2 " + tag
-                clientsocket.send(ret.encode()) # send error to client
+                clientsocket.send(ret.encode("utf-8")) # send error to client
             else:
                 print("unsubscription succeded")
                 ret = "succ2 " + tag
-                clientsocket.send(ret.encode()) # send success to client
+                clientsocket.send(ret.encode("utf-8")) # send success to client
         else:
             ret = "err5"
-            clientsocket.send(ret.encode()) # the command is not supported
+            clientsocket.send(ret.encode("utf-8")) # the command is not supported
     clientsocket.close()
 
 # Logs the user in
@@ -133,7 +133,7 @@ def tweet(clientsocket, addr, message, tags):
                 if tag == tag_tweeted or tag == "ALL": 
                     target = True
                     twt = "succ5 " + addr_user[addr] + ": " + message + " " + tags
-                    user_socket[user].send(twt.encode())
+                    user_socket[user].send(twt.encode("utf-8"))
                     break
     return True
 

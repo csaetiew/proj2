@@ -65,7 +65,7 @@ def main():
     while True:
         data = ''
         while True:
-            part = s.recv(BUFFER_SIZE).decode('ASCII')
+            part = s.recv(BUFFER_SIZE)
             data += part
             if len(part) < BUFFER_SIZE:
                 break
