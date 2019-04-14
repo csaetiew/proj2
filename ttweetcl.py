@@ -28,50 +28,66 @@ def listen(s, msgbox):
         s.send(MESSAGE.encode("utf-8")) # Send message to server
 
 def main():
+    # Checks the number of arguements
     if len(sys.argv) !=4:
         print("args should contain <ServerIP>   <ServerPort>   <Username>")
         return
 
+    # Initialize IP, PORT, BUFFER_SIZE, initial login message, and username
     TCP_IP = sys.argv[1]
     TCP_PORT = int(sys.argv[2])
     BUFFER_SIZE = 1024
     MESSAGE = "login " + sys.argv[3]
     userName = sys.argv[3]
+
+    # Test range of IP
     IP_test = TCP_IP.split(".")
     for ip in IP_test:
         if int(ip) < 0 or int(ip) > 255:
             print("IP should be in [0, 255]")
             return
 
+    # Test range of PORT numbers
     if TCP_PORT < 0 or TCP_PORT > 65535:
         print("port number should be in [1,65535]")
         return
 
+    # Initialize message box for user
     msgbox = []
     msgbox.append("")
+
+    # Create socket
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+    # Attempt to connect to server, exit if failed
     try:
         s.connect((TCP_IP, TCP_PORT))
     except socket.error:
         print ("connection error, please check your server: connection refused")
         return
+    # Start a new thread to allow input from user and send the socket and message box
     thread.start_new_thread(listen,(s, msgbox))
+
+    # Send the login message 
     s.send(MESSAGE.encode("utf-8"))
 
     while True:
+        # Receive data from the server
         data = ''
         while True:
             part = s.recv(BUFFER_SIZE)
             data += part
             if len(part) < BUFFER_SIZE:
                 break
+        # check the code for success or error and go throught the
+        # if statement to print correct report
         code = data.split(" ")[0]
-        if code == "err0":
+        if code == "err0": # Login error where the username is already taken
             print("The user " + sys.argv[3] + " is already logged in")
             break
-        elif code == "succ0":
+        elif code == "succ0": # Login success
             print("logged in as " + sys.argv[3])
-        elif code == "err1":
+        elif code == "err1": # Subscription error due to 3 limitation or already subscribed
             print("sub " + data.split(" ")[1] + " failed, already exists or exceeds 3 limitation")
         elif code == "succ1":
             print("Subscribed to " + data.split(" ")[1])
@@ -85,7 +101,8 @@ def main():
         elif code == "err3":
             print("Length of message is over 150 characters")
         elif code == "succ3":
-            print("Successfully tweeted")
+            pass 
+            # print("Successfully tweeted")
         elif code == "err4":
             print("No messages")
         elif code == "succ4":
