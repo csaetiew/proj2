@@ -93,9 +93,9 @@ def main():
         elif code == "succ5":
             print("user: " + userName + ", get message: " + data[6:])
             if len(msgbox[0]) == 0:
-                msgbox[0] += data[6:]
+                msgbox[0] += "user: " + userName + ", get timeline: " + data[6:]
             else:
-                msgbox[0] += "\n" + data[6:]
+                msgbox[0] += "\n" + "user: " + userName + ", get timeline: " + data[6:]
 
         elif code =="err5":
             print("Not a proper command")
