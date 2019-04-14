@@ -24,7 +24,7 @@ def listen(s, msgbox):
                 print("Length of message is over 150 characters")
             if len(new_message) < 1:
                 print("must have at least 1 character")
-        s.send(MESSAGE.encode())
+        s.send(MESSAGE.encode("utf-8"))
 
 def main():
     if len(sys.argv) !=4:
@@ -56,7 +56,7 @@ def main():
         return
 
     thread.start_new_thread(listen,(s, msgbox))
-    s.send(MESSAGE.encode())
+    s.send(MESSAGE.encode("utf-8"))
 
     while True:
         data = ''
