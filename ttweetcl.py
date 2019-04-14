@@ -58,7 +58,7 @@ def main():
     except socket.error:
         print ("connection error, please check your server: connection refused")
         return
-
+    print("connection succ")
     thread.start_new_thread(listen,(s, msgbox))
     s.send(MESSAGE.encode("utf-8"))
 
