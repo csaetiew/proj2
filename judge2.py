@@ -315,7 +315,7 @@ class judge:
 
         self.file.write('test_illegal_input\n')
         self.file.flush()
-        cmds=[' ', ' 127.0.0.1',' 324.1.1.4', ' 127.0.0.1 -3', ' 127.0.0.1 80 ', ' 127.0.0.1 13000 ']
+        cmds=[' ', ' 127.0.0.1',' 324.1.1.4', ' 127.0.0.1 -3', ' 127.0.0.1 80 ', ' 127.0.0.1 13001 ']
         for postfix in cmds:
             cmd = self.run[type] + name + postfix
             self.file.write('\nrun command: '+ cmd +'\n')
@@ -340,7 +340,7 @@ class judge:
         return p
 
 
-    def runTest(self, type, srv = True, port=13000):
+    def runTest(self, type, srv = True, port=13001):
         client_names={'j':'ttweetcl','p':'ttweetcl.py','c':'ttweetcl', 'jar': 'ttweetcl.jar'}
         srv_names = {'j': 'ttweetsrv', 'p': 'ttweetsrv.py', 'c': 'ttweetsrv', 'jar': 'ttweetsrv.jar'}
 
@@ -370,4 +370,4 @@ class judge:
 if __name__ == '__main__':
     import sys
     args = sys.argv
-    judge().runTest(args[1], True, 13000)
+    judge().runTest(args[1], True, 13001)
