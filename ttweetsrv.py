@@ -46,7 +46,6 @@ def on_new_client(clientsocket,addr):
         elif command == "login":
             username = msg.split(" ")[1]
             user = username
-            print(user)
             if not login(clientsocket, addr, user):
                 print("login failed")
                 ret = "err0"
@@ -106,14 +105,13 @@ def login(clientsocket, addr, username):
     for user in current_users:
         if username == user:
             return False
-    
+    print("  " + username)
     addr_user[addr] = username
     current_users.append(username)
     tweet_box[username] = []
     user_tags[username] = []
     user_socket[username] = clientsocket
 
-    print("The current users are ")
     print(current_users)
     return True
 
