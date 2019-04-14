@@ -36,7 +36,6 @@ def main():
     TCP_PORT = int(sys.argv[2])
     BUFFER_SIZE = 1024
     MESSAGE = "login " + sys.argv[3]
-    userName = sys.argv[3]
 
     IP_test = TCP_IP.split(".")
     for ip in IP_test:
@@ -93,11 +92,12 @@ def main():
             print(msgbox)
         elif code == "succ5":
             print(data[6:])
-            temp = userName + ", timeline message: " + data[6:]
+
+            
             if len(msgbox[0]) == 0:
-                msgbox[0] += temp
+                msgbox[0] += data[6:]
             else:
-                msgbox[0] += "\n" + temp
+                msgbox[0] += "\n" + data[6:]
 
         elif code =="err5":
             print("Not a proper command")
