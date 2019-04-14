@@ -147,7 +147,7 @@ def subscribe(clientsocket, addr, tag, username):
     current_tags = user_tags[username]
     for subbed_tag in current_tags:
         if subbed_tag == tag:
-            return True
+            return False
     # checks the current amount of subscribed tags
     if len(current_tags) == 3:
         return False

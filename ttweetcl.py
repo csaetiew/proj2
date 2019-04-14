@@ -7,7 +7,6 @@ import thread
 def listen(s, msgbox):
     while True:
         MESSAGE = raw_input() # obtain input from user
-        print(MESSAGE)
 
         # prints message box and resets box
         if MESSAGE == "timeline":
@@ -18,7 +17,6 @@ def listen(s, msgbox):
         if MESSAGE.split(" ")[0] == "tweet":
             message_array = MESSAGE.split("\"")
             new_message = ""
-            print(message_array)
             for x in range(1, len(message_array) - 1):
                 new_message += message_array[x]
             print(new_message)
@@ -75,9 +73,9 @@ def main():
         elif code == "succ0":
             print("logged in as " + sys.argv[3])
         elif code == "err1":
-            print("Could not subscribe to " + data.split(" ")[1])
+            print("sub " + data.split(" ")[1] + " failed, already exists or exceeds 3 limitation")
         elif code == "succ1":
-            print("successfully subscribed to " + data.split(" ")[1])
+            print("Subscribed to " + data.split(" ")[1])
         elif code == "exited":
             print("Successfully Logged out")
             break
@@ -94,10 +92,11 @@ def main():
         elif code == "succ4":
             print(msgbox)
         elif code == "succ5":
+            print(data[6:])
             if len(msgbox[0]) == 0:
-                msgbox[0] +=  data[6:]
+                msgbox[0] += data[6:]
             else:
-                msgbox[0] +=  "\n" + data[6:]
+                msgbox[0] += "\n" + data[6:]
 
         elif code =="err5":
             print("Not a proper command")
