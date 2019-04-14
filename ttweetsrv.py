@@ -13,7 +13,7 @@ user_socket = {}
 def on_new_client(clientsocket,addr):
     user = ""
     while True:
-        msg = clientsocket.recv(1024).decode('ASCII')[2:]
+        msg = clientsocket.recv(1024).decode('ASCII')
         command = msg.split(" ")[0]
         print("received " + msg)
 
@@ -95,7 +95,6 @@ def on_new_client(clientsocket,addr):
         # something = "hello my friend"
 
         #do some checks and if msg == someWeirdSignal: break:
-        print (addr[1], ' >> ', msg)
 
         #Maybe some code to compute the last digit of PI, play game or anything else can go here and when you are done.
     clientsocket.close()
